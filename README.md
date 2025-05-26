@@ -10,13 +10,14 @@ Desenvolver uma aplicação SaaS voltada para clínicas médicas, permitindo aos
 
 ## 🚀 Funcionalidades previstas
 
-- Autenticação de usuários com segurança OAuth  
+- Autenticação de usuários com segurança 
 - Cadastro de clínicas e profissionais da saúde  
 - Cadastro e gerenciamento de pacientes  
 - Agendamento com calendário inteligente  
 - Dashboard com gráficos de atendimentos por período  
 - Integração com gateways de pagamento  
-- Painel administrativo com controle de permissões  
+- Painel administrativo com controle de permissões
+- Área de planos
 
 ## 🛠️ Tecnologias Utilizadas
 

@@ -1,4 +1,4 @@
-# 🏥 Bootcampo - SaaS para Clínica Médica
+# 🏥 Bootcamp - SaaS para Clínica Médica
 
 ## 📌 Objetivo
 

@@ -28,7 +28,17 @@ Desenvolver uma aplicação SaaS voltada para clínicas médicas, permitindo aos
 - **Node.js** — Ambiente de execução para o backend  
 - **Drizzle ORM** — ORM moderno e tipado para bancos de dados relacionais  
 - **PostgreSQL** — Banco de dados relacional robusto e escalável  
-- **Vercel** — Plataforma para deploy contínuo e escalável  
+- **Vercel** — Plataforma para deploy contínuo e escalável
+
+```
+npm install -D prettier prettier-plugin-tailwindcss
+npm i eslint-plugin-simple-import-sort@12.1.1 -D
+npm i drizzle-orm@0.43.1 pg@8.15.6 
+npm i -D drizzle-kit@0.31.1
+npx drizzle-kit push
+npx drizzle-kit studio
+npx shadcn@2.5.0 init
+```
 
 ## 📦 Estrutura do Projeto
     /app          # Rotas e componentes de página

@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const loginSchema = z.object({ 
+const loginSchema = z.object({
   email: z.string().trim().email({ message: "E-mail inválido" }),
   password: z
     .string()
@@ -37,7 +37,7 @@ const handleOnLogin = (values: z.infer<typeof loginSchema>) => {
 const Login = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
-    defaultValues: {      
+    defaultValues: {
       email: "",
       password: "",
     },
@@ -71,7 +71,11 @@ const Login = () => {
                 <FormItem>
                   <FormLabel>Senha</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite sua senha" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Digite sua senha"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -10,10 +10,18 @@ export const auth = betterAuth({
     usePlural: true,
     schema: schema,
   }),
-  user: { modelName: "usersTable" },
-  session: { modelName: "sessionsTable" },
-  account: { modelName: "accountsTable" },
-  verification: { modelName: "verificationsTable" },
+  user: {
+    modelName: "usersTable",
+  },
+  session: {
+    modelName: "sessionsTable",
+  },
+  account: {
+    modelName: "accountsTable",
+  },
+  verification: {
+    modelName: "verificationsTable",
+  },
   emailAndPassword: {
     enabled: true,
   },

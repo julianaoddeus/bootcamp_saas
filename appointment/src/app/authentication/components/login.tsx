@@ -1,6 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -24,7 +25,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/src/lib/auth-client";
 
 const loginSchema = z.object({
   email: z.string().trim().email({ message: "E-mail inválido" }),
@@ -60,6 +61,13 @@ const Login = () => {
       },
     );
   };
+  const handleOnLoginGoogle = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard",
+    });
+  };
+
   return (
     <Card>
       <Form {...form}>
@@ -101,13 +109,29 @@ const Login = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full">
-              {form.formState.isSubmitting ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                "Entrar"
-              )}
-            </Button>
+            <div className="w-full space-y-2">
+              <Button className="w-full" type="submit">
+                {form.formState.isSubmitting && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Entrar
+              </Button>
+              <Button
+                type="button"
+                className="w-full"
+                variant="outline"
+                onClick={handleOnLoginGoogle}
+              >
+                <Image
+                  src="/google.svg"
+                  alt="Login com Google"
+                  width={24}
+                  height={24}
+                  className="mr-2"
+                />
+                Entrar com Google
+              </Button>
+            </div>
           </CardFooter>
         </form>
       </Form>

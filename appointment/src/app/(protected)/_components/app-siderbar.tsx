@@ -16,7 +16,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   Sidebar,
   SidebarContent,
@@ -57,6 +57,8 @@ const items = [
 
 const AppSidebar = () => {
   const router = useRouter();
+  const session = authClient.useSession();
+
   const handlerSignOut = async () => {
     await authClient.signOut({
       fetchOptions: {
@@ -96,11 +98,34 @@ const AppSidebar = () => {
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button>Clínica</Button>
+                <SidebarMenuButton size="lg">
+                  <Avatar>
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      alt="avatar"
+                    />
+                  </Avatar>
+                  <div>
+                    <p className="text-sm">
+                      {session.data?.user?.clinic?.name}
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      {session.data?.user?.email}
+                    </p>
+                  </div>
+                </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={handlerSignOut}>
-                  <LogOut />
+              <DropdownMenuContent
+                className="w-56"
+                align="end"
+                alignOffset={-12}
+                sideOffset={8}
+              >
+                <DropdownMenuItem
+                  onClick={handlerSignOut}
+                  className="flex cursor-pointer items-center gap-2"
+                >
+                  <LogOut className="h-4 w-4" />
                   Sair
                 </DropdownMenuItem>
               </DropdownMenuContent>

@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { auth } from "@/src/lib/auth";
+import { auth } from "@/lib/auth";
 
 import Login from "./components/login";
 import Signup from "./components/signup";

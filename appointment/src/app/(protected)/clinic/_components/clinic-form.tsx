@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 
+import { createClinic } from "@/actions/create-clinic";
 import { Button } from "@/components/ui/button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import {
@@ -17,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createClinic } from "@/src/create-clinic";
 
 const clinicSchema = z.object({
   name: z.string().trim().min(3, { message: "Nome é obrigatório" }),

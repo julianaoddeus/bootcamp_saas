@@ -47,20 +47,32 @@ const Login = () => {
   });
 
   const handleOnLogin = async (values: z.infer<typeof loginSchema>) => {
-    await authClient.signIn.email(
-      {
-        email: values.email,
-        password: values.password,
-      },
-      {
-        onSuccess: () => {
-          router.push("/dashboard");
+    try {
+      await authClient.signIn.email(
+        {
+          email: values.email,
+          password: values.password,
         },
-        onError: () => {
-          toast.error("E-mail ou senha inválidos!");
+        {
+          onSuccess: (response) => {
+            const session = response.data;
+            // Se não tem clínica, redireciona para criar uma
+            if (!session?.user?.clinic) {
+              router.push("/clinic");
+            } else {
+              router.push("/dashboard");
+            }
+          },
+          onError: (error) => {
+            console.error("Erro no login:", error);
+            toast.error("E-mail ou senha inválidos!");
+          },
         },
-      },
-    );
+      );
+    } catch (error) {
+      console.error("Erro inesperado:", error);
+      toast.error("Ocorreu um erro ao tentar fazer login. Tente novamente.");
+    }
   };
   const handleOnLoginGoogle = async () => {
     await authClient.signIn.social({

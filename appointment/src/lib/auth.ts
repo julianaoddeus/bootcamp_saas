@@ -22,24 +22,41 @@ export const auth = betterAuth({
   },
   plugins: [
     customSession(async ({ user, session }) => {
-      const clinics = await db.query.usersToClinicsTable.findMany({
-        where: eq(usersToClinicsTable.userId, user.id),
-        with: {
-          clinic: true,
-        },
-      });
-      // adapatar para o usuário adm mais clinicas
-      const data = clinics[0];
-      return {
-        user: {
-          ...user,
-          clinic: {
-            id: data?.clinicId,
-            name: data?.clinic?.name,
+      try {
+        const clinics = await db.query.usersToClinicsTable.findMany({
+          where: eq(usersToClinicsTable.userId, user.id),
+          with: {
+            clinic: true,
           },
-        },
-        session,
-      };
+        });
+
+        const data = clinics?.[0];
+
+        // Se não tem clínica, retorna undefined para clinic
+        // O sistema irá redirecionar para /clinic
+        return {
+          user: {
+            ...user,
+            clinic: data?.clinicId
+              ? {
+                  id: data?.clinicId,
+                  name: data?.clinic?.name,
+                }
+              : undefined,
+          },
+          session,
+        };
+      } catch (error) {
+        console.error("Erro ao buscar clínicas do usuário:", error);
+        // Em caso de erro na busca, também retorna undefined para clinic
+        return {
+          user: {
+            ...user,
+            clinic: undefined,
+          },
+          session,
+        };
+      }
     }),
   ],
   user: {

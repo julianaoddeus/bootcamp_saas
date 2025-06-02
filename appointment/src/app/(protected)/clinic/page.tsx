@@ -21,10 +21,13 @@ const ClinicPage = async () => {
   if (!session?.user) {
     redirect("/authentication");
   }
-  if (!session.user.clinic) {
-    redirect("/clinic");
+
+  // Se já tem uma clínica, redireciona para o dashboard
+  if (session.user.clinic) {
+    redirect("/dashboard");
   }
   //--------* fim do acesso a seção de usuário *----------
+
   return (
     <div>
       <Dialog open={true}>

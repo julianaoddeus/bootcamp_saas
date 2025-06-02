@@ -1,4 +1,7 @@
+import { eq } from "drizzle-orm";
 import { Plus } from "lucide-react";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,10 +12,31 @@ import {
   PageHeaderDescription,
   PageHeaderTitle,
 } from "@/components/ui/page-container";
+import { db } from "@/db";
+import { usersToClinicsTable } from "@/db/schema";
+import { auth } from "@/lib/auth";
 
 import { PageActions } from "../../../components/ui/page-container";
 
-const DoctorsPage = () => {
+const DoctorsPage = async () => {
+  //--------* acesso a seção de usuário *----------
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) {
+    redirect("/authentication");
+  }
+
+  const clinics = await db.query.usersToClinicsTable.findMany({
+    where: eq(usersToClinicsTable.userId, session.user.id),
+  });
+
+  if (clinics.length === 0) {
+    redirect("/clinic");
+  }
+  //--------* fim do acesso a seção de usuário *----------
+
   return (
     <PageContainer>
       <PageHeader>

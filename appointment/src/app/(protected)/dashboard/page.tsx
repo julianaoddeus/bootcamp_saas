@@ -11,6 +11,7 @@ import AppSidebar from "../_components/app-siderbar";
 import SignOutButton from "./_components/sign-out-button";
 
 const DashboardPage = async () => {
+  //--------* acesso a seção de usuário *----------
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -26,7 +27,7 @@ const DashboardPage = async () => {
   if (clinics.length === 0) {
     redirect("/clinic");
   }
-
+  //--------* fim do acesso a seção de usuário *----------
   return (
     <>
       <div className="flex items-center gap-2 p-4">

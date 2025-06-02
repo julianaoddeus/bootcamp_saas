@@ -1,4 +1,3 @@
-import { eq } from "drizzle-orm";
 import { Plus } from "lucide-react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -12,8 +11,6 @@ import {
   PageHeaderDescription,
   PageHeaderTitle,
 } from "@/components/ui/page-container";
-import { db } from "@/db";
-import { usersToClinicsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 import { PageActions } from "../../../components/ui/page-container";
@@ -28,11 +25,7 @@ const DoctorsPage = async () => {
     redirect("/authentication");
   }
 
-  const clinics = await db.query.usersToClinicsTable.findMany({
-    where: eq(usersToClinicsTable.userId, session.user.id),
-  });
-
-  if (clinics.length === 0) {
+  if (!session.user.clinic) {
     redirect("/clinic");
   }
   //--------* fim do acesso a seção de usuário *----------

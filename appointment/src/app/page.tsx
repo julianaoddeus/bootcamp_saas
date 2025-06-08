@@ -24,7 +24,7 @@ export default function Home() {
           asChild
           className="mt-8 w-[300px] bg-white px-8 py-6 text-lg font-semibold text-[#002E77] hover:bg-white/90"
         >
-          <Link href="/authentication">
+          <Link href="/dashboard">
             <span>Começar Agora</span>
           </Link>
         </Button>

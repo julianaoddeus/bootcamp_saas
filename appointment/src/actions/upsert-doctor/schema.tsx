@@ -2,8 +2,7 @@ import { z } from "zod";
 
 export const upsertDoctorSchema = z
   .object({
-    id: z.string().optional(),
-    clinicId: z.string().uuid(),
+    id: z.string().uuid().optional(),   
     name: z.string().trim().min(3, { message: "Nome é obrigatório" }),
     speciality: z
       .string()

@@ -30,10 +30,7 @@ export const auth = betterAuth({
           },
         });
 
-        const data = clinics?.[0];
-
-        // Se não tem clínica, retorna undefined para clinic
-        // O sistema irá redirecionar para /clinic
+        const data = clinics?.[0];       
         return {
           user: {
             ...user,
@@ -47,8 +44,7 @@ export const auth = betterAuth({
           session,
         };
       } catch (error) {
-        console.error("Erro ao buscar clínicas do usuário:", error);
-        // Em caso de erro na busca, também retorna undefined para clinic
+        console.error("Erro ao buscar clínicas do usuário:", error);        
         return {
           user: {
             ...user,

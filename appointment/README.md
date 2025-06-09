@@ -7,6 +7,7 @@
 - React Hook Form
 - Zod (para validação de schemas)
 - Sonner (para notificações/toasts)
+- ShadCN (versão  2.5.0)
 
 # Backend:
 
@@ -31,3 +32,4 @@
 - Implementa Server Actions para operações do servidor
 - Usa uma estrutura de rotas baseada em pastas (App Router do Next.js)
 - Segue uma arquitetura de componentes protegidos (pasta (protected))
+

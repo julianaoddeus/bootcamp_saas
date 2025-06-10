@@ -1,10 +1,11 @@
-import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+"use client";
 import {
   CalendarIcon,
   ClockIcon,
   DollarSignIcon,
   PencilIcon,
 } from "lucide-react";
+import { useState } from "react";
 
 import { formatCurrencyInCents } from "@/_helpers/currency";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,6 +17,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { doctorsTable } from "@/db/schema";
 
@@ -27,6 +29,7 @@ interface DoctorCardsProps {
 }
 
 const DoctorCards = ({ doctor }: DoctorCardsProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const doctorInitials = doctor.name
     .split(" ")
     .map((name) => name[0])
@@ -65,20 +68,23 @@ const DoctorCards = ({ doctor }: DoctorCardsProps) => {
       </CardContent>
       <Separator />
       <CardFooter>
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
             <Button className="w-full">
               <PencilIcon className="mr-1" />
               Ver detalhes
             </Button>
           </DialogTrigger>
-          <UpsertDoctorForm
-            doctor={{
-              ...doctor,
-              availableFromTime: availability.from.format("HH:mm:ss"),
-              availableToTime: availability.to.format("HH:mm:ss"),
-            }}
-          />
+          <DialogContent>
+            <UpsertDoctorForm
+              doctor={{
+                ...doctor,
+                availableFromTime: availability.from.format("HH:mm:ss"),
+                availableToTime: availability.to.format("HH:mm:ss"),
+              }}
+              onSuccess={() => setIsOpen(false)}
+            />
+          </DialogContent>
         </Dialog>
       </CardFooter>
     </Card>

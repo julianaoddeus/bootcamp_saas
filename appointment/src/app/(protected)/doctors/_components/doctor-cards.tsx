@@ -72,7 +72,13 @@ const DoctorCards = ({ doctor }: DoctorCardsProps) => {
               Ver detalhes
             </Button>
           </DialogTrigger>
-          <UpsertDoctorForm />
+          <UpsertDoctorForm
+            doctor={{
+              ...doctor,
+              availableFromTime: availability.from.format("HH:mm:ss"),
+              availableToTime: availability.to.format("HH:mm:ss"),
+            }}
+          />
         </Dialog>
       </CardFooter>
     </Card>

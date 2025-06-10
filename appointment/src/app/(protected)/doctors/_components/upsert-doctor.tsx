@@ -34,6 +34,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { doctorsTable } from "@/db/schema";
 
 import { medicalSpecialties } from "../_contants";
 import { generateTimeSlots } from "../_contants/generateTimeSlots";
@@ -73,6 +74,7 @@ const formSchema = z
   );
 
 interface UpsertDoctorFormProps {
+  doctor?: typeof doctorsTable.$inferSelect;
   onSuccess?: () => void;
 }
 
@@ -80,17 +82,17 @@ const morningTimeSlots = generateTimeSlots("06:00", "12:30");
 const afternoonTimeSlots = generateTimeSlots("13:00", "18:30");
 const nightTimeSlots = generateTimeSlots("19:00", "23:59");
 
-const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
+const UpsertDoctorForm = ({ doctor, onSuccess }: UpsertDoctorFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      speciality: "",
-      appointmentPrice: 0,
-      availableFromWeekDays: `${WeekDays.MONDAY}`,
-      availableToWeekDays: `${WeekDays.FRIDAY}`,
-      availableFromTime: "06:00:00",
-      availableToTime: "18:30:00",
+      name: doctor?.name ?? "",
+      speciality: doctor?.speciality ?? "",
+      appointmentPrice: doctor?.appointmentPriceInCents ?? 0,
+      availableFromWeekDays: `${doctor?.availableFromWeekDays ?? WeekDays.MONDAY}`,
+      availableToWeekDays: `${doctor?.availableToWeekDays ?? WeekDays.FRIDAY}`,
+      availableFromTime: doctor?.availableFromTime ?? "",
+      availableToTime: doctor?.availableToTime ?? "",
     },
   });
 

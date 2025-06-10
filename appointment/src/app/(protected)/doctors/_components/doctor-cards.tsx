@@ -1,6 +1,12 @@
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
-import { CalendarIcon, PencilIcon } from "lucide-react";
+import {
+  CalendarIcon,
+  ClockIcon,
+  DollarSignIcon,
+  PencilIcon,
+} from "lucide-react";
 
+import { formatCurrencyInCents } from "@/_helpers/currency";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -13,6 +19,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { doctorsTable } from "@/db/schema";
 
+import { getAvailability } from "../_helpers/availability";
 import UpsertDoctorForm from "./upsert-doctor";
 
 interface DoctorCardsProps {
@@ -25,11 +32,12 @@ const DoctorCards = ({ doctor }: DoctorCardsProps) => {
     .map((name) => name[0])
     .join("");
 
+  const availability = getAvailability(doctor);
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center gap-2">
-          <Avatar>
+          <Avatar className="h-10 w-10">
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>{doctorInitials}</AvatarFallback>
           </Avatar>
@@ -40,14 +48,19 @@ const DoctorCards = ({ doctor }: DoctorCardsProps) => {
         </div>
       </CardHeader>
       <Separator />
-      <CardContent className="gap1 flex flex-col">
+      <CardContent className="flex flex-col gap-2">
         <Badge variant="outline">
           <CalendarIcon className="mr-1" />
-          Segunda à Sexta
+          {availability.from.format("dddd")} à {availability.to.format("dddd")}
         </Badge>
         <Badge variant="outline">
-          <CalendarIcon className="mr-1" />
-          Segunda à Sexta
+          <ClockIcon className="mr-1" />
+          {availability.from.format("HH:mm")} às{" "}
+          {availability.to.format("HH:mm")}
+        </Badge>
+        <Badge variant="outline">
+          <DollarSignIcon className="mr-1" />
+          {formatCurrencyInCents(doctor.appointmentPriceInCents)}
         </Badge>
       </CardContent>
       <Separator />

@@ -39,7 +39,6 @@ import { doctorsTable } from "@/db/schema";
 import { medicalSpecialties } from "../_contants";
 import { generateTimeSlots } from "../_contants/generateTimeSlots";
 import { WeekDays, weekDaysLabels } from "../_contants/week-days-enum";
-
 const formSchema = z
   .object({
     name: z.string().trim().min(3, { message: "Nome é obrigatório" }),

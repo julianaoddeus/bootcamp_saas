@@ -29,9 +29,9 @@ Desenvolver uma aplicação SaaS voltada para clínicas médicas, permitindo aos
 - **Drizzle ORM** — ORM moderno e tipado para bancos de dados relacionais  
 - **PostgreSQL** — Banco de dados relacional robusto e escalável  
 - **Vercel** — Plataforma para deploy contínuo e escalável
-- **Tailwind CSS** - estilização de componetes
-- **Zod** - validação de formulários
-- **Better Auth** - autenticação de usuários
+- **Tailwind CSS** — estilização de componetes
+- **Zod** — validação de formulários
+- **Better Auth** — autenticação de usuários
 
 ```
 npm install -D prettier prettier-plugin-tailwindcss

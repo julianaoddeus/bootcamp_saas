@@ -24,11 +24,14 @@ Desenvolver uma aplicação SaaS voltada para clínicas médicas, permitindo aos
 - **Next.js** — Framework React para desenvolvimento fullstack  
 - **React** — Biblioteca JavaScript para construção da interface  
 - **Typescript** — Superset do JavaScript com tipagem estática  
-- **ShadCN/UI** — Componentes UI modernos, acessíveis e personalizáveis  
+- **Shadcn/UI** — Componentes UI modernos, acessíveis e personalizáveis  
 - **Node.js** — Ambiente de execução para o backend  
 - **Drizzle ORM** — ORM moderno e tipado para bancos de dados relacionais  
 - **PostgreSQL** — Banco de dados relacional robusto e escalável  
 - **Vercel** — Plataforma para deploy contínuo e escalável
+- **Tailwind CSS**
+- **Zod**
+- **Better Auth** 
 
 ```
 npm install -D prettier prettier-plugin-tailwindcss

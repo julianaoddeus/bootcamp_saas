@@ -75,13 +75,14 @@ const formSchema = z
 interface UpsertDoctorFormProps {
   doctor?: typeof doctorsTable.$inferSelect;
   onSuccess?: () => void;
+  isOpen: boolean;
 }
 
 const morningTimeSlots = generateTimeSlots("06:00", "12:30");
 const afternoonTimeSlots = generateTimeSlots("13:00", "18:30");
 const nightTimeSlots = generateTimeSlots("19:00", "23:59");
 
-const UpsertDoctorForm = ({ doctor, onSuccess }: UpsertDoctorFormProps) => {
+const UpsertDoctorForm = ({ doctor, onSuccess}: UpsertDoctorFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     shouldUnregister: true,
     resolver: zodResolver(formSchema),
